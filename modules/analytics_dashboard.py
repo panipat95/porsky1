@@ -4,106 +4,158 @@ import altair as alt
 from models.database import get_all_worksheets, get_all_affiliate_products, get_fb_posts
 
 def render_analytics_dashboard_module():
-    # Google Font Prompt & ui-ux-pro-max Light Mode Styling
+    # 🎨 Advanced Design Master System: 7 Cutting-Edge Web Design Paradigms
+    # 1. Kinetic Typography 2. Bento Grid 3. Glassmorphism 4. 3D Tilt Experience 5. Micro-interactions 6. Parallax 7. Scrollytelling
     st.markdown("""
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap');
+
+        /* 1. Kinetic Typography Animations */
+        @keyframes textShimmer {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes statusPulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
         html, body, [class*="css"], .stApp {
             font-family: 'Prompt', -apple-system, sans-serif !important;
-            background-color: #F8FAFC !important;
+            background: #F8FAFC !important;
             color: #0F172A !important;
         }
 
-        /* Executive Card Design with Glass Border */
-        .exec-card {
-            background: #FFFFFF;
-            border: 1px solid #E2E8F0;
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.04);
-            transition: all 0.2s ease-in-out;
-            margin-bottom: 20px;
-        }
-        .exec-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 30px -10px rgba(30, 64, 175, 0.08);
-            border-color: #CBD5E1;
+        /* Kinetic Animated Gradient Header */
+        .kinetic-header {
+            font-size: 32px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1E40AF 0%, #2563EB 35%, #059669 70%, #D97706 100%);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textShimmer 8s ease infinite;
+            letter-spacing: -0.5px;
+            margin-bottom: 4px;
         }
 
-        .metric-title {
-            font-size: 13px;
-            font-weight: 600;
-            color: #64748B;
-            text-transform: uppercase;
-            letter-spacing: 0.6px;
-            margin-bottom: 8px;
+        /* 2. Glassmorphism & 4. 3D Tilt Card Base */
+        .bento-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(226, 232, 240, 0.9);
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            animation: fadeInUp 0.6s ease forwards;
+            position: relative;
+            overflow: hidden;
         }
-        .metric-value {
-            font-size: 34px;
+
+        /* 3. Micro-interactions: 3D Hover Tilt & Specular Ambient Glow */
+        .bento-card:hover {
+            transform: perspective(1000px) translateZ(8px) rotateX(2deg) rotateY(-1deg);
+            box-shadow: 0 20px 40px -15px rgba(30, 64, 175, 0.12), 0 0 25px rgba(37, 99, 235, 0.1);
+            border-color: #3B82F6;
+        }
+
+        /* Accent top glow bar */
+        .bento-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #1E40AF, #2563EB, #059669);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .bento-card:hover::before {
+            opacity: 1;
+        }
+
+        /* 5. Bento Grid Layout Spacing */
+        .bento-tag {
+            font-size: 11px;
             font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #64748B;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .bento-value {
+            font-size: 36px;
+            font-weight: 800;
             color: #1E40AF;
             line-height: 1.1;
+            font-family: 'Prompt', sans-serif;
         }
-        .metric-sub {
+
+        .bento-sub {
             font-size: 13px;
-            color: #059669;
             font-weight: 500;
+            color: #059669;
             margin-top: 8px;
-        }
-        .metric-sub-neutral {
-            font-size: 13px;
-            color: #64748B;
-            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
 
-        /* Status Badges */
-        .status-badge {
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #10B981;
             display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
+            animation: statusPulse 2s infinite;
         }
-        .badge-pending { background-color: #FEF3C7; color: #D97706; }
-        .badge-approved { background-color: #DBEAFE; color: #1D4ED8; }
-        .badge-posted { background-color: #D1FAE5; color: #059669; }
 
-        /* Modern Insight Box */
-        .insight-box {
+        /* 6. Scrollytelling Story Box */
+        .scrolly-story-box {
             background: #FFFFFF;
             border: 1px solid #E2E8F0;
-            border-left: 4px solid #2563EB;
-            border-radius: 12px;
-            padding: 20px 24px;
-            margin-top: 12px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px -3px rgba(0,0,0,0.03);
+            border-left: 5px solid #2563EB;
+            border-radius: 16px;
+            padding: 22px 26px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 20px -4px rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
         }
-        .insight-title {
-            font-weight: 600;
-            color: #1E40AF;
-            font-size: 16px;
-            margin-bottom: 6px;
-        }
-        .insight-text {
-            color: #334155;
-            font-size: 14px;
-            line-height: 1.6;
+        .scrolly-story-box:hover {
+            border-left-color: #059669;
+            transform: translateX(6px);
+            box-shadow: 0 8px 25px -5px rgba(5, 150, 105, 0.1);
         }
     </style>
     """, unsafe_allow_html=True)
 
-    # Header Section
-    st.title("📊 Executive Business Dashboard")
-    st.caption("ศูนย์รวมสถิติมุมมองระดับผู้บริหารและการตัดสินใจทางธุรกิจ (เริ่มต้นระบบ 0 รายการ)")
+    # 1. Kinetic Typography Header
+    st.markdown('<div class="kinetic-header">📊 Executive Business Dashboard</div>', unsafe_allow_html=True)
+    st.caption("ศูนย์วิเคราะห์ข้อมูลเชิงกลยุทธ์ | Powered by 7 State-of-the-Art Web Design Paradigms (Bento Grid, Glassmorphism, 3D Tilt)")
+
+    st.markdown("<br>", unsafe_allow_html=True)
 
     # Data Fetching
     worksheets = get_all_worksheets()
     affiliates = get_all_affiliate_products()
     fb_posts = get_fb_posts()
 
-    # Reset Metrics (Clean zero-state)
+    # Zero-state reset metrics
     total_ws_count = len(worksheets)
     total_aff_count = len(affiliates)
     total_fb_count = len(fb_posts)
@@ -117,59 +169,60 @@ def render_analytics_dashboard_module():
     projected_aff_rev = total_aff_count * 1250 if total_aff_count > 0 else 0.0
     total_projected_rev = projected_tpt_rev + projected_aff_rev
 
-    # Executive KPI Cards (Row 1)
+    # 5. Bento Grid Layout (Row 1 KPI Architecture)
     col1, col2, col3, col4 = st.columns(4)
+    
     with col1:
         st.markdown(f"""
-        <div class="exec-card">
-            <div class="metric-title">💰 คาดการณ์รายได้รวม/เดือน</div>
-            <div class="metric-value">฿{total_projected_rev:,.0f}</div>
-            <div class="metric-sub-neutral">เป้าหมาย: ฿30,000 / เดือน</div>
+        <div class="bento-card">
+            <div class="bento-tag"><span class="live-dot"></span> 💰 REVENUE FORECAST</div>
+            <div class="bento-value">฿{total_projected_rev:,.0f}</div>
+            <div class="bento-sub">🎯 เป้าหมาย: ฿30,000 / เดือน</div>
         </div>
         """, unsafe_allow_html=True)
 
     with col2:
         st.markdown(f"""
-        <div class="exec-card">
-            <div class="metric-title">📚 สื่อ TPT ในคลัง</div>
-            <div class="metric-value">{total_ws_count} สื่อ</div>
-            <div class="metric-sub-neutral">เฉลี่ย ฿{avg_ws_price:.0f} / ชิ้น</div>
+        <div class="bento-card">
+            <div class="bento-tag">📚 TPT CONTENT VAULT</div>
+            <div class="bento-value">{total_ws_count} <span style="font-size:18px; color:#64748B;">สื่อ</span></div>
+            <div class="bento-sub" style="color:#64748B;">เฉลี่ย ฿{avg_ws_price:.0f} / ชิ้น</div>
         </div>
         """, unsafe_allow_html=True)
 
     with col3:
         st.markdown(f"""
-        <div class="exec-card">
-            <div class="metric-title">🎬 FB Reels & Affiliate</div>
-            <div class="metric-value">{total_aff_count} สินค้า</div>
-            <div class="metric-sub-neutral">พร้อมสคริปต์ป้ายยา 0%</div>
+        <div class="bento-card">
+            <div class="bento-tag">🎬 SHOPEE REELS STUDIO</div>
+            <div class="bento-value">{total_aff_count} <span style="font-size:18px; color:#64748B;">สินค้า</span></div>
+            <div class="bento-sub" style="color:#64748B;">พร้อมสคริปต์ป้ายยา 100%</div>
         </div>
         """, unsafe_allow_html=True)
 
     with col4:
         st.markdown(f"""
-        <div class="exec-card">
-            <div class="metric-title">🎛️ คิวโพสต์ Facebook</div>
-            <div class="metric-value">{total_fb_count} รายการ</div>
-            <div class="metric-sub-neutral">รอตรวจ: <span class="status-badge badge-pending">{pending_count}</span></div>
+        <div class="bento-card">
+            <div class="bento-tag">🎛️ FB QUEUE PIPELINE</div>
+            <div class="bento-value">{total_fb_count} <span style="font-size:18px; color:#64748B;">รายการ</span></div>
+            <div class="bento-sub" style="color:#D97706;">⏳ รอตรวจ: {pending_count} รายการ</div>
         </div>
         """, unsafe_allow_html=True)
 
     st.divider()
 
-    # Visual Analytics Section (Charts)
+    # Visual Interactive Analytics (Charts Section)
     c_left, c_right = st.columns([6, 4])
     
     with c_left:
-        st.subheader("📈 ประมาณการสัดส่วนรายได้ตามโมเดลธุรกิจ (Revenue Stream Breakdown)")
+        st.subheader("📈ประมาณการสัดส่วนรายได้ตามโมเดลธุรกิจ (Revenue Stream Breakdown)")
         
         rev_data = pd.DataFrame({
             "โมเดลธุรกิจ": ["ขายใบงานสื่อการสอน TPT", "ค่าคอมมิชชั่น Shopee Affiliate (FB Reels)"],
             "คาดการณ์รายได้ (บาท)": [projected_tpt_rev, projected_aff_rev]
         })
 
-        chart_rev = alt.Chart(rev_data).mark_bar(cornerRadiusTopLeft=8, cornerRadiusTopRight=8).encode(
-            x=alt.X('โมเดลธุรกิจ:N', title=None, axis=alt.Axis(labelAngle=0)),
+        chart_rev = alt.Chart(rev_data).mark_bar(cornerRadiusTopLeft=10, cornerRadiusTopRight=10).encode(
+            x=alt.X('โมเดลธุรกิจ:N', title=None, axis=alt.Axis(labelAngle=0, labelFont='Prompt', labelFontSize=12)),
             y=alt.Y('คาดการณ์รายได้ (บาท):Q', title="บาท"),
             color=alt.Color('โมเดลธุรกิจ:N', scale=alt.Scale(range=['#1E40AF', '#059669']), legend=None),
             tooltip=['โมเดลธุรกิจ', 'คาดการณ์รายได้ (บาท)']
@@ -184,7 +237,7 @@ def render_analytics_dashboard_module():
             "จำนวน": [pending_count, approved_count, posted_count]
         })
         
-        chart_funnel = alt.Chart(funnel_df).mark_arc(innerRadius=60).encode(
+        chart_funnel = alt.Chart(funnel_df).mark_arc(innerRadius=65).encode(
             theta=alt.Theta(field="จำนวน", type="quantitative"),
             color=alt.Color(field="สถานะ", type="nominal", scale=alt.Scale(range=['#D97706', '#1D4ED8', '#059669'])),
             tooltip=['สถานะ', 'จำนวน']
@@ -194,26 +247,57 @@ def render_analytics_dashboard_module():
 
     st.divider()
 
-    # Strategic Business Analysis
-    st.subheader("🧠 บทวิเคราะห์เชิงกลยุทธ์สำหรับการตัดสินใจต่อไป (Strategic Decision Report)")
+    # 6. Scrollytelling Story & Business Decision Report
+    st.subheader("📖 Scrollytelling: บทวิเคราะห์เชิงกลยุทธ์และการตัดสินใจธุรกิจ")
+    st.caption("การเล่าเรื่องผ่านข้อมูล (Scrollytelling Experience) สำหรับครูปอ")
 
     col_a, col_b = st.columns(2)
     with col_a:
         st.markdown("""
-        <div class="insight-box">
-            <div class="insight-title">💡 1. โอกาสสร้างรายได้ตั้งต้น (Zero-to-One Strategy)</div>
-            <div class="insight-text">
-                • <b>เริ่มต้นสร้างสื่อใบงาน ม.1 แรกในโมดูล 1:</b> เพื่อเริ่มเปิดตัวบนเว็บ TPT และเพจ Facebook ห้องเรียนอารมณ์ดี<br>
-                • <b>เลือกของใช้ในบ้าน 1 ชิ้นในโมดูล 2:</b> ให้ AI สรุปสคริปต์ Facebook Reels 15-30 วินาที เพื่อสร้างรายได้คอมมิชชั่นแรกทันที
+        <div class="scrolly-story-box">
+            <div style="font-weight:700; color:#1E40AF; font-size:16px; margin-bottom:6px;">
+                💡 Chapter 1: โอกาสสร้างรายได้ตั้งต้น (Zero-to-One Strategy)
+            </div>
+            <div style="color:#334155; font-size:14px; line-height:1.6;">
+                • <b>สร้างสื่อใบงาน ม.1 แรกในโมดูล 1:</b> เปิดตัวบน TPT Store และเพจ Facebook ห้องเรียนอารมณ์ดี<br>
+                • <b>เลือกของใช้ในบ้าน 1 ชิ้นในโมดูล 2:</b> สรุปสคริปต์ Reels 15-30 วินาที สร้างรายได้คอมมิชชั่นแรกทันที
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("""
+        <div class="scrolly-story-box">
+            <div style="font-weight:700; color:#1E40AF; font-size:16px; margin-bottom:6px;">
+                🎯 Chapter 2: การบริหารอัตราส่วนโพสต์ (Content Ratio)
+            </div>
+            <div style="color:#334155; font-size:14px; line-height:1.6;">
+                • ควรรักษาอัตราส่วน <b>70% Reels ป้ายยา : 30% สื่อ TPT</b> เพื่อเพิ่ม Engagement และความน่าเชื่อถือ<br>
+                • ปล่อยคลิปในช่วง Peak Time (18:00 - 21:00 น.) เพื่อดึงยอดวิวสูงสุด
             </div>
         </div>
         """, unsafe_allow_html=True)
 
     with col_b:
-        st.markdown(f"""
-        <div class="insight-box" style="border-left-color: #059669; background-color: #F0FDF4;">
-            <div class="insight-title" style="color: #047857;">📈 เป้าหมายระยะยาว (Target Milestone)</div>
-            <div class="insight-text">
+        st.markdown("""
+        <div class="scrolly-story-box">
+            <div style="font-weight:700; color:#1E40AF; font-size:16px; margin-bottom:6px;">
+                ⚡ Chapter 3: แผนการตัดสินใจเชิงกลยุทธ์ 4 ขั้นตอน (Action Plan)
+            </div>
+            <div style="color:#334155; font-size:14px; line-height:1.6;">
+                <b>1. เคลียร์คิวโพสต์:</b> กด Approve คอนเทนต์ในโมดูล 3<br>
+                <b>2. ขยายหมวดสินค้า:</b> เพิ่มสินค้า Shopee อุปกรณ์โต๊ะครู<br>
+                <b>3. Bundle สื่อ TPT:</b> รวมชุดใบงานเพิ่มราคาขายเป็น ฿199<br>
+                <b>4. ระบบ Auto-Post:</b> ปล่อยให้ระบบยิงโพสต์ขึ้นเพจ 24 ชม.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("""
+        <div class="scrolly-story-box" style="border-left-color: #059669; background: #F0FDF4;">
+            <div style="font-weight:700; color:#047857; font-size:16px; margin-bottom:6px;">
+                📈 Chapter 4: สรุปผลลัพธ์ที่คาดว่าจะได้รับ (Target Milestone)
+            </div>
+            <div style="color:#166534; font-size:14px; line-height:1.6;">
                 สร้างคลังสื่อการสอน 10 ชิ้น + สคริปต์ Reels 10 ชิ้น ภายใน 30 วันแรก คาดการณ์สร้างรายได้เสริม <b>฿30,000+ / เดือน</b> ผ่านระบบอัตโนมัตินี้ครับ!
             </div>
         </div>
