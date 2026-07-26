@@ -1,6 +1,6 @@
 """
 Facebook Graph API Utility for Auto-posting to Facebook Page
-Includes Live Meta API call and Mock fallback for testing without credentials.
+Includes Live Meta API call, Streamlit Secrets support, and Mock fallback.
 """
 
 import os
@@ -9,22 +9,35 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+# Check Environment Variables first, then Streamlit Secrets fallback for Cloud Deployment
 FB_PAGE_ID = os.getenv("FB_PAGE_ID", "")
 FB_PAGE_ACCESS_TOKEN = os.getenv("FB_PAGE_ACCESS_TOKEN", "")
 FB_API_VERSION = os.getenv("FB_API_VERSION", "v19.0")
 
+# Streamlit Cloud Secrets Fallback
+if not FB_PAGE_ID or not FB_PAGE_ACCESS_TOKEN:
+    try:
+        import streamlit as st
+        if "FB_PAGE_ID" in st.secrets:
+            FB_PAGE_ID = st.secrets["FB_PAGE_ID"]
+        if "FB_PAGE_ACCESS_TOKEN" in st.secrets:
+            FB_PAGE_ACCESS_TOKEN = st.secrets["FB_PAGE_ACCESS_TOKEN"]
+        if "FB_API_VERSION" in st.secrets:
+            FB_API_VERSION = st.secrets["FB_API_VERSION"]
+    except Exception:
+        pass
+
+
 def post_to_facebook_page(message: str, link: str = None) -> dict:
     """
     ส่งข้อมูลโพสต์ไปยัง Facebook Page ผ่าน Meta Graph API
-    หากยังไม่มี Token จะทำการ Mock ส่งสำเร็จเพื่อให้ทดลองระบบได้
     """
     if not FB_PAGE_ID or not FB_PAGE_ACCESS_TOKEN or FB_PAGE_ID == "your_facebook_page_id_here":
-        # Mock Response สำหรับทดสอบ
         return {
             "success": True,
             "mock": True,
             "id": "mock_fb_post_123456789",
-            "message": "ระบบทำงานในโหมด Simulative (ยังไม่ได้ใส่ FB_PAGE_ACCESS_TOKEN ใน .env)"
+            "message": "ระบบทำงานในโหมด Simulative (ยังไม่ได้ใส่ FB_PAGE_ACCESS_TOKEN)"
         }
     
     url = f"https://graph.facebook.com/{FB_API_VERSION}/{FB_PAGE_ID}/feed"
