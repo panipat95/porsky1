@@ -3,23 +3,24 @@ import os
 
 # Set Streamlit Page Configuration
 st.set_page_config(
-    page_title="ครูปอ All-in-One Executive Ecosystem",
+    page_title="ครูปอ All-in-One Pastel Executive Ecosystem",
     page_icon="🎓",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# 🎨 ธีมฟ้า-ขาว สว่าง สดใส (Ultra-Bright Sky-Blue & Crisp White Theme)
-# แก้ไขปัญหาตัวอักษรกลืนกับพื้นหลัง 100% ด้วยสีสดใส คอนทราสต์สูง อ่านง่ายที่สุด
+# 🎨 Pastel Luxury & Interactive Effects System (ui-ux-pro-max compliant)
+# ธีมพาสเทล หรูหรา สดใส สบายตา คอนทราสต์สูง อ่านง่าย 100%
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap');
     
     /* Global Base */
     html, body, [class*="css"], .stApp {
         font-family: 'Prompt', -apple-system, sans-serif !important;
-        background-color: #F0F9FF !important; /* Sky 50 สว่าง สดใส */
-        color: #0F172A !important;
+        background: linear-gradient(135deg, #F8FAFC 0%, #EEF2FF 50%, #F0FDF4 100%) !important;
+        color: #1E1B4B !important;
+        -webkit-font-smoothing: antialiased !important;
     }
     
     .main .block-container {
@@ -28,65 +29,60 @@ st.markdown("""
         max-width: 1440px;
     }
 
-    /* สว่าง คมชัด: Sidebar โทนฟ้าสดใส */
+    /* 🎨 Pastel Luxury Sidebar (โทนพาสเทล สดใส หรูหรา) */
     section[data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #0284C7 0%, #0369A1 100%) !important;
-        border-right: 2px solid #0284C7 !important;
-        box-shadow: 4px 0 20px rgba(2, 132, 199, 0.15) !important;
+        background: linear-gradient(180deg, #F3E8FF 0%, #E0F2FE 50%, #F0FDF4 100%) !important;
+        border-right: 2px solid #E0E7FF !important;
+        box-shadow: 4px 0 25px rgba(139, 92, 246, 0.08) !important;
     }
     
-    /* บังคับสีตัวอักษรทุกตัวใน Sidebar เป็นสีขาวสว่าง 100% คมชัด */
+    /* สีตัวอักษรตั้งต้นใน Sidebar */
     section[data-testid="stSidebar"] * {
-        color: #FFFFFF !important;
+        color: #4C1D95 !important;
         font-family: 'Prompt', sans-serif !important;
-        opacity: 1 !important;
     }
 
-    /* Brand Header Box ด้านซ้าย (การ์ดสีขาวบริสุทธิ์ คอนทราสต์สูงสุด) */
-    .brand-card-bright {
+    /* Brand Header Box ด้านซ้าย (การ์ดพาสเทลสีขาวบริสุทธิ์) */
+    .brand-card-pastel {
         background: #FFFFFF !important;
-        border: 2px solid #E0F2FE !important;
-        border-radius: 18px !important;
+        border: 2px solid #DDD6FE !important;
+        border-radius: 20px !important;
         padding: 18px !important;
-        margin-bottom: 20px !important;
+        margin-bottom: 22px !important;
         display: flex !important;
         align-items: center !important;
         gap: 14px !important;
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
-    }
-    
-    .brand-card-bright * {
-        color: #0F172A !important;
+        box-shadow: 0 10px 25px rgba(139, 92, 246, 0.12) !important;
     }
 
-    .brand-avatar-bright {
-        width: 48px;
-        height: 48px;
-        border-radius: 14px;
-        background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+    .brand-avatar-pastel {
+        width: 50px;
+        height: 50px;
+        border-radius: 16px;
+        background: linear-gradient(135deg, #8B5CF6 0%, #38BDF8 100%);
         color: #FFFFFF !important;
         font-weight: 800;
         font-size: 20px;
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+        box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
     }
 
-    .brand-title-bright {
+    .brand-title-pastel {
         font-size: 18px;
         font-weight: 800;
-        color: #0369A1 !important;
+        color: #5B21B6 !important;
         line-height: 1.2;
     }
 
-    .brand-subtitle-bright {
+    .brand-subtitle-pastel {
         font-size: 12px;
-        color: #64748B !important;
+        color: #6D28D9 !important;
         font-weight: 600;
     }
 
-    .brand-status-bright {
+    .brand-status-pastel {
         display: inline-flex;
         align-items: center;
         gap: 6px;
@@ -95,65 +91,72 @@ st.markdown("""
         color: #047857 !important;
         font-size: 11px;
         font-weight: 700;
-        padding: 3px 10px;
+        padding: 3px 12px;
         border-radius: 16px;
         margin-top: 4px;
     }
 
-    /* ปรับแต่ง ปุ่มเมนู Radio Buttons ให้สว่าง ตัวอักษรใหญ่ คมกริบ */
+    /* ปุ่มเมนู Radio Buttons ใน Sidebar (สไตล์พาสเทลลอยตัว) */
     section[data-testid="stSidebar"] .stRadio label {
-        background: rgba(255, 255, 255, 0.15) !important;
-        border: 1px solid rgba(255, 255, 255, 0.3) !important;
+        background: rgba(255, 255, 255, 0.7) !important;
+        border: 1.5px solid #DDD6FE !important;
         border-radius: 14px !important;
         padding: 12px 18px !important;
         margin-bottom: 6px !important;
+        transition: all 0.25s ease !important;
         cursor: pointer !important;
     }
 
     section[data-testid="stSidebar"] .stRadio label p,
     section[data-testid="stSidebar"] .stRadio label span {
-        color: #FFFFFF !important;
+        color: #4C1D95 !important;
         font-size: 15px !important;
         font-weight: 700 !important;
     }
 
-    /* เมนูที่ถูกเลือก (Active Card): การ์ดสีขาวบริสุทธิ์ ตัวอักษรสีฟ้าเข้ม อ่านง่าย 100% */
-    section[data-testid="stSidebar"] .stRadio div[aria-checked="true"] label {
+    section[data-testid="stSidebar"] .stRadio label:hover {
         background: #FFFFFF !important;
-        border-color: #FFFFFF !important;
-        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2) !important;
+        border-color: #A78BFA !important;
+        transform: translateX(4px);
+    }
+
+    /* เมนูที่ถูกเลือก (Active Card): Gradient พาสเทลสีม่วงสด ตัวอักษรสีขาวสว่าง คอนทราสต์ 100% */
+    section[data-testid="stSidebar"] .stRadio div[aria-checked="true"] label {
+        background: linear-gradient(135deg, #7C3AED 0%, #2563EB 100%) !important;
+        border-color: #A78BFA !important;
+        box-shadow: 0 8px 20px rgba(124, 58, 237, 0.35) !important;
     }
 
     section[data-testid="stSidebar"] .stRadio div[aria-checked="true"] label p,
     section[data-testid="stSidebar"] .stRadio div[aria-checked="true"] label span {
-        color: #0284C7 !important;
+        color: #FFFFFF !important;
         font-weight: 800 !important;
     }
 
-    /* Top Live Notification Bar */
-    .notif-bar-bright {
+    /* Top Live Notification Hub Bar (Pastel Card) */
+    .notif-bar-pastel {
         background: #FFFFFF;
-        border: 1px solid #E0F2FE;
-        border-left: 6px solid #0284C7;
-        border-radius: 16px;
+        border: 2px solid #E0E7FF;
+        border-left: 6px solid #8B5CF6;
+        border-radius: 18px;
         padding: 16px 24px;
         margin-bottom: 24px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        box-shadow: 0 6px 20px rgba(2, 132, 199, 0.06);
+        box-shadow: 0 8px 25px rgba(139, 92, 246, 0.06);
     }
 
-    .notif-text-bright {
+    .notif-text-pastel {
         font-size: 15px;
         font-weight: 700;
-        color: #0F172A;
+        color: #4C1D95;
         display: flex;
         align-items: center;
         gap: 10px;
     }
 
-    .notif-tag-bright {
+    .notif-tag-pastel {
         background: #FEF3C7;
         border: 1px solid #FDE68A;
         color: #B45309;
@@ -181,37 +184,37 @@ init_db()
 fb_posts = get_fb_posts()
 pending_posts = [p for p in fb_posts if p['status'] == 'pending_approval']
 
-# Top Live Notification Hub Bar (Bright Executive Style)
+# Top Live Notification Hub Bar (Pastel Luxury Style)
 st.markdown(f"""
-<div class="notif-bar-bright">
-    <div class="notif-text-bright">
+<div class="notif-bar-pastel">
+    <div class="notif-text-pastel">
         <span style="font-size:20px;">🔔</span>
         <span><b>ศูนย์แจ้งเตือนด่วน (Live Notification Center):</b></span>
         <span style="color:#475569; font-weight:500;">
-            ระบบเชื่อมต่อปกติ 🟢 | เพจ Facebook: <b>ห้องเรียนอารมณ์ดี (LIVE)</b>
+            ระบบเชื่อมต่อปกติ 🟢 | เพเพจ Facebook: <b>ห้องเรียนอารมณ์ดี (LIVE)</b>
         </span>
     </div>
     <div>
-        <span class="notif-tag-bright">⏳ คอนเทนต์รอกรองอนุมัติ: {len(pending_posts)} รายการ</span>
+        <span class="notif-tag-pastel">⏳ คอนเทนต์รอกรองอนุมัติ: {len(pending_posts)} รายการ</span>
     </div>
 </div>
 """, unsafe_allow_html=True)
 
-# Brand Header Box in Sidebar (White Card with Ocean Blue Text)
+# Brand Header Box in Sidebar (Pastel White Card)
 st.sidebar.markdown("""
-<div class="brand-card-bright">
-    <div class="brand-avatar-bright">KP</div>
+<div class="brand-card-pastel">
+    <div class="brand-avatar-pastel">KP</div>
     <div>
-        <div class="brand-title-bright">ครูปอ Ecosystem</div>
-        <div class="brand-subtitle-bright">Executive Content Studio</div>
-        <div class="brand-status-bright">
+        <div class="brand-title-pastel">ครูปอ Ecosystem</div>
+        <div class="brand-subtitle-pastel">Executive Content Studio</div>
+        <div class="brand-status-pastel">
             🟢 LIVE: ห้องเรียนอารมณ์ดี
         </div>
     </div>
 </div>
 """, unsafe_allow_html=True)
 
-st.sidebar.markdown("<p style='font-size:12px; font-weight:800; color:#E0F2FE !important; letter-spacing:1.5px; margin-bottom:10px; margin-left:4px;'>NAVIGATION MENU</p>", unsafe_allow_html=True)
+st.sidebar.markdown("<p style='font-size:12px; font-weight:800; color:#6D28D9 !important; letter-spacing:1.5px; margin-bottom:10px; margin-left:4px;'>NAVIGATION MENU</p>", unsafe_allow_html=True)
 
 menu = st.sidebar.radio(
     "เลือกเมนูการทำงาน:",
@@ -227,7 +230,7 @@ menu = st.sidebar.radio(
 )
 
 st.sidebar.divider()
-st.sidebar.caption("ครูปอ All-in-One Bright Sky Edition v3.0")
+st.sidebar.caption("ครูปอ All-in-One Pastel Luxury Edition v4.0")
 
 # Route to selected module
 if menu == "📊 หน้าหลัก & บทวิเคราะห์ธุรกิจ":
