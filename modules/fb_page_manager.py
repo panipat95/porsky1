@@ -69,7 +69,7 @@ def render_fb_page_manager_module():
                             KP
                         </div>
                         <div>
-                            <div style="font-weight: bold; color: #e4e6eb;">ครูปอ - Learning & Lifestyle</div>
+                            <div style="font-weight: bold; color: #e4e6eb;">ห้องเรียนอารมณ์ดี</div>
                             <div style="font-size: 12px; color: #b0b3b8;">เมื่อสักครู่ · 🌐 Public</div>
                         </div>
                     </div>
@@ -77,7 +77,7 @@ def render_fb_page_manager_module():
 {edited_text}
                     </div>
                 </div>
-                """, unsafe_allow_ascii=False, unsafe_allow_html=True)
+                """, unsafe_allow_html=True)
                 
             st.divider()
             
