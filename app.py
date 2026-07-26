@@ -10,10 +10,10 @@ st.set_page_config(
 )
 
 # 🎨 Pastel Luxury & Interactive Effects System (ui-ux-pro-max compliant)
-# ธีมพาสเทล หรูหรา สดใส สบายตา คอนทราสต์สูง อ่านง่าย 100%
+# ป้องกันการทับซ้อนฟอนต์ Material Icons เพื่อแก้ปัญหาข้อความ 'keyboard_double_a' แสดงผลค้าง
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700;800&display=swap');
     
     /* Global Base */
     html, body, [class*="css"], .stApp {
@@ -29,17 +29,28 @@ st.markdown("""
         max-width: 1440px;
     }
 
-    /* 🎨 Pastel Luxury Sidebar (โทนพาสเทล สดใส หรูหรา) */
+    /* 🎨 Pastel Luxury Sidebar */
     section[data-testid="stSidebar"] {
         background: linear-gradient(180deg, #F3E8FF 0%, #E0F2FE 50%, #F0FDF4 100%) !important;
         border-right: 2px solid #E0E7FF !important;
         box-shadow: 4px 0 25px rgba(139, 92, 246, 0.08) !important;
     }
     
-    /* สีตัวอักษรตั้งต้นใน Sidebar */
-    section[data-testid="stSidebar"] * {
-        color: #4C1D95 !important;
-        font-family: 'Prompt', sans-serif !important;
+    /* ปรับแต่งสีและฟอนต์เฉพาะส่วนข้อความใน Sidebar (ยกเว้นไอคอนระบบ) */
+    section[data-testid="stSidebar"] p,
+    section[data-testid="stSidebar"] label,
+    section[data-testid="stSidebar"] div {
+        color: #4C1D95;
+        font-family: 'Prompt', sans-serif;
+    }
+
+    /* คืนค่าฟอนต์ไอคอนระบบ Streamlit (ป้องกันข้อความ keyboard_double_arrow) */
+    button[data-testid="stSidebarCollapseButton"] *,
+    [data-testid="stSidebarHeader"] *,
+    .material-symbols-outlined,
+    [class*="material-symbols"],
+    [data-testid="stIcon"] {
+        font-family: 'Material Symbols Outlined', 'Material Icons', sans-serif !important;
     }
 
     /* Brand Header Box ด้านซ้าย (การ์ดพาสเทลสีขาวบริสุทธิ์) */
@@ -120,7 +131,7 @@ st.markdown("""
         transform: translateX(4px);
     }
 
-    /* เมนูที่ถูกเลือก (Active Card): Gradient พาสเทลสีม่วงสด ตัวอักษรสีขาวสว่าง คอนทราสต์ 100% */
+    /* เมนูที่ถูกเลือก (Active Card): Gradient พาสเทลสีม่วงสด ตัวอักษรสีขาวสว่าง */
     section[data-testid="stSidebar"] .stRadio div[aria-checked="true"] label {
         background: linear-gradient(135deg, #7C3AED 0%, #2563EB 100%) !important;
         border-color: #A78BFA !important;
@@ -191,7 +202,7 @@ st.markdown(f"""
         <span style="font-size:20px;">🔔</span>
         <span><b>ศูนย์แจ้งเตือนด่วน (Live Notification Center):</b></span>
         <span style="color:#475569; font-weight:500;">
-            ระบบเชื่อมต่อปกติ 🟢 | เพเพจ Facebook: <b>ห้องเรียนอารมณ์ดี (LIVE)</b>
+            ระบบเชื่อมต่อปกติ 🟢 | เพจ Facebook: <b>ห้องเรียนอารมณ์ดี (LIVE)</b>
         </span>
     </div>
     <div>
@@ -230,7 +241,7 @@ menu = st.sidebar.radio(
 )
 
 st.sidebar.divider()
-st.sidebar.caption("ครูปอ All-in-One Pastel Luxury Edition v4.0")
+st.sidebar.caption("ครูปอ All-in-One Pastel Luxury Edition v4.1")
 
 # Route to selected module
 if menu == "📊 หน้าหลัก & บทวิเคราะห์ธุรกิจ":
