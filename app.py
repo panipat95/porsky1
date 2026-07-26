@@ -3,25 +3,23 @@ import os
 
 # Set Streamlit Page Configuration
 st.set_page_config(
-    page_title="ครูปอ All-in-One Ecosystem",
-    page_icon="🎓",
+    page_title="ครูปอ Pixel Art AI Studio & Ecosystem",
+    page_icon="🎮",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# Sky-Blue & Pure White Design System (Custom CSS Injection)
+# Sky-Blue & Pure White Pixel Art UI System
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap');
     
-    /* 1. Kinetic Animations */
     @keyframes statusGlow {
         0% { box-shadow: 0 0 5px rgba(255, 255, 255, 0.4); }
         50% { box-shadow: 0 0 15px rgba(255, 255, 255, 0.9); }
         100% { box-shadow: 0 0 5px rgba(255, 255, 255, 0.4); }
     }
 
-    /* Global Canvas */
     html, body, [class*="css"], .stApp {
         font-family: 'Prompt', -apple-system, sans-serif !important;
         background-color: #F0F9FF; /* Sky 50 */
@@ -33,7 +31,7 @@ st.markdown("""
         max-width: 1400px;
     }
 
-    /* Sky-Blue & White Premium Sidebar */
+    /* Sky-Blue & White Sidebar */
     section[data-testid="stSidebar"] {
         background: linear-gradient(180deg, #0284C7 0%, #0369A1 100%) !important;
         border-right: 1px solid #0284C7;
@@ -85,7 +83,6 @@ st.markdown("""
         color: #E0F2FE !important;
     }
 
-    /* Live Status Pill */
     .live-status-pill {
         display: inline-flex;
         align-items: center;
@@ -108,7 +105,7 @@ st.markdown("""
         background-color: #FFFFFF;
     }
 
-    /* Modern Navigation Radio Buttons */
+    /* Modern Navigation Items */
     section[data-testid="stSidebar"] .stRadio > div {
         gap: 10px;
     }
@@ -142,7 +139,6 @@ st.markdown("""
         color: #0284C7 !important;
     }
 
-    /* Dividers */
     hr {
         border-color: #E0F2FE !important;
     }
@@ -151,6 +147,7 @@ st.markdown("""
 
 # Import Database & Modules
 from models.database import init_db
+from modules.pixel_office import render_pixel_office_module
 from modules.analytics_dashboard import render_analytics_dashboard_module
 from modules.student_care_tpt import render_student_care_tpt_module
 from modules.shopee_affiliate import render_shopee_affiliate_module
@@ -166,7 +163,7 @@ st.sidebar.markdown("""
     <div class="brand-avatar">KP</div>
     <div>
         <div class="brand-title">ครูปอ Ecosystem</div>
-        <div class="brand-subtitle">CEO Content Studio</div>
+        <div class="brand-subtitle">Pixel AI Studio Office</div>
         <div class="live-status-pill">
             <span class="status-dot"></span> LIVE: ห้องเรียนอารมณ์ดี
         </div>
@@ -179,6 +176,7 @@ st.sidebar.markdown("<p style='font-size:12px; font-weight:700; color:#E0F2FE !i
 menu = st.sidebar.radio(
     "เลือกโมดูลการทำงาน:",
     [
+        "🎮 สำนักงานเสมือน Pixel AI Studio",
         "📊 หน้าหลัก & บทวิเคราะห์ธุรกิจ",
         "🎓 1. ผลิตสื่อ ม.1 & ใบงาน TPT",
         "🎬🛒 2. FB Reels & Shopee Affiliate",
@@ -190,14 +188,16 @@ menu = st.sidebar.radio(
 
 st.sidebar.markdown("<br>", unsafe_allow_html=True)
 st.sidebar.info("""
-💡 **7 Design Paradigms Active:**
-- Sky-Blue & Pure White Theme
-- Scrollytelling & Bento Grid
-- Glassmorphism & Micro-interactions
+💡 **Pixel AI Office Active:**
+- สำนักงาน 2D Pixel Art 5 AI Agents
+- เชื่อมต่อการทำงานและ API เพจจริง 100%
 """)
 
 # Route to selected module
-if menu == "📊 หน้าหลัก & บทวิเคราะห์ธุรกิจ":
+if menu == "🎮 สำนักงานเสมือน Pixel AI Studio":
+    render_pixel_office_module()
+
+elif menu == "📊 หน้าหลัก & บทวิเคราะห์ธุรกิจ":
     render_analytics_dashboard_module()
 
 elif menu == "🎓 1. ผลิตสื่อ ม.1 & ใบงาน TPT":
