@@ -4,173 +4,100 @@ import altair as alt
 from models.database import get_all_worksheets, get_all_affiliate_products, get_fb_posts
 
 def render_analytics_dashboard_module():
-    # 🎨 Pastel Luxury & Interactive Effects System (ui-ux-pro-max compliant)
+    # Streamlined Minimalist Executive Theme
     st.markdown("""
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700;800&display=swap');
 
-        /* Pastel Shimmer Keyframes */
-        @keyframes pastelShimmer {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        @keyframes pulseGlow {
-            0% { box-shadow: 0 0 0 0 rgba(167, 139, 250, 0.6); }
-            70% { box-shadow: 0 0 0 12px rgba(167, 139, 250, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(167, 139, 250, 0); }
-        }
-
-        /* Pastel Base Canvas */
         html, body, [class*="css"], .stApp {
             font-family: 'Prompt', -apple-system, sans-serif !important;
-            background: linear-gradient(135deg, #F8FAFC 0%, #EEF2FF 50%, #F0FDF4 100%) !important;
-            color: #1E1B4B !important;
+            background: #F8FAFC !important;
+            color: #0F172A !important;
         }
 
-        /* Kinetic Pastel Title Header */
-        .pastel-title-header {
-            font-size: 32px;
+        .clean-title {
+            font-size: 28px;
             font-weight: 800;
-            background: linear-gradient(135deg, #7C3AED 0%, #2563EB 35%, #059669 70%, #DB2777 100%);
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: pastelShimmer 7s ease infinite;
-            letter-spacing: -0.5px;
+            color: #0F172A;
             margin-bottom: 4px;
         }
 
-        /* Bento Pastel Card (3D Tilt & Glassmorphism Effects) */
-        .pastel-bento-card {
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 2px solid #E0E7FF;
-            border-radius: 22px;
-            padding: 24px;
-            box-shadow: 0 10px 30px -10px rgba(99, 102, 241, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.8);
-            transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-            transform-style: preserve-3d;
-            perspective: 1000px;
-            position: relative;
-            overflow: hidden;
+        /* Clean KPI Bento Cards */
+        .clean-kpi-card {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            transition: all 0.2s ease;
         }
 
-        /* Interactive 3D Hover Tilt & Ambient Pastel Glow */
-        .pastel-bento-card:hover {
-            transform: perspective(1000px) translateZ(10px) rotateX(3deg) rotateY(-2deg);
-            box-shadow: 0 20px 40px -10px rgba(124, 58, 237, 0.2), 0 0 25px rgba(56, 189, 248, 0.2);
-            border-color: #C084FC;
+        .clean-kpi-card:hover {
+            border-color: #2563EB;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.08);
         }
 
-        .pastel-bento-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, #A78BFA, #38BDF8, #34D399, #F472B6);
-            opacity: 0.85;
+        .clean-kpi-label {
+            font-size: 13px;
+            font-weight: 700;
+            color: #64748B;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
         }
 
-        .pastel-tag {
-            font-size: 12px;
+        .clean-kpi-value {
+            font-size: 34px;
             font-weight: 800;
-            letter-spacing: 0.8px;
-            color: #6D28D9;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .pastel-value {
-            font-size: 38px;
-            font-weight: 800;
-            color: #4C1D95;
+            color: #2563EB;
             line-height: 1.1;
         }
 
-        .pastel-sub {
+        .clean-kpi-sub {
             font-size: 13px;
             font-weight: 600;
-            color: #2563EB;
-            margin-top: 8px;
+            color: #059669;
+            margin-top: 6px;
         }
 
-        .pulse-dot {
-            width: 9px;
-            height: 9px;
-            border-radius: 50%;
-            background-color: #8B5CF6;
-            display: inline-block;
-            animation: pulseGlow 2s infinite;
-        }
-
-        /* Funnel Card List */
-        .funnel-pastel-box {
+        /* Clean Funnel Items */
+        .clean-funnel-box {
             background: #FFFFFF;
-            border: 2px solid #E0E7FF;
-            border-radius: 20px;
+            border: 1px solid #E2E8F0;
+            border-radius: 16px;
             padding: 20px;
-            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.05);
         }
 
-        .funnel-pastel-item {
+        .clean-funnel-item {
             background: #F8FAFC;
-            border: 1px solid #EEF2FF;
-            border-radius: 14px;
-            padding: 14px 18px;
-            margin-bottom: 12px;
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 12px 16px;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            transition: all 0.25s ease;
         }
-        .funnel-pastel-item:hover {
-            border-color: #C084FC;
-            background: #FFFFFF;
-            transform: translateX(6px);
-            box-shadow: 0 4px 15px rgba(167, 139, 250, 0.15);
-        }
-        .funnel-pastel-label {
-            font-weight: 700;
-            font-size: 14px;
-            color: #4C1D95;
-        }
-        .funnel-pastel-badge {
-            padding: 5px 16px;
-            border-radius: 20px;
-            font-weight: 800;
-            font-size: 13px;
-        }
-        .badge-pending-pastel { background: #FEF3C7; color: #B45309; border: 1px solid #FDE68A; }
-        .badge-approved-pastel { background: #EDE9FE; color: #6D28D9; border: 1px solid #DDD6FE; }
-        .badge-posted-pastel { background: #D1FAE5; color: #047857; border: 1px solid #A7F3D0; }
 
-        /* Scrollytelling Pastel Cards */
-        .scrolly-pastel-card {
+        .badge-pending { background: #FEF3C7; color: #B45309; padding: 4px 12px; border-radius: 16px; font-weight: 700; font-size: 12px; }
+        .badge-approved { background: #DBEAFE; color: #1D4ED8; padding: 4px 12px; border-radius: 16px; font-weight: 700; font-size: 12px; }
+        .badge-posted { background: #D1FAE5; color: #047857; padding: 4px 12px; border-radius: 16px; font-weight: 700; font-size: 12px; }
+
+        .clean-story-card {
             background: #FFFFFF;
-            border: 2px solid #E0E7FF;
-            border-left: 6px solid #8B5CF6;
-            border-radius: 18px;
-            padding: 22px 26px;
-            margin-bottom: 16px;
-            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.06);
-            transition: all 0.3s ease;
-        }
-        .scrolly-pastel-card:hover {
-            border-left-color: #EC4899;
-            transform: translateX(8px);
-            box-shadow: 0 10px 30px rgba(236, 72, 153, 0.15);
+            border: 1px solid #E2E8F0;
+            border-left: 5px solid #2563EB;
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 14px;
         }
     </style>
     """, unsafe_allow_html=True)
 
     # Header
-    st.markdown('<div class="pastel-title-header">📊 Executive Business Analytics Dashboard</div>', unsafe_allow_html=True)
-    st.caption("ศูนย์วิเคราะห์ข้อมูลเชิงกลยุทธ์ | ธีมพาสเทลหรูหรา (Pastel Luxury System & 3D Interactive Effects)")
+    st.markdown('<div class="clean-title">📊 หน้าหลัก & แดชบอร์ดสรุปรายได้ (Executive Dashboard)</div>', unsafe_allow_html=True)
+    st.caption("ศูนย์รวมการวิเคราะห์ข้อมูลและเป้าหมายรายได้ สไตล์คลีน มินิมอล อ่านง่าย คมชัด 100%")
 
     st.markdown("<br>", unsafe_allow_html=True)
 
@@ -179,7 +106,7 @@ def render_analytics_dashboard_module():
     affiliates = get_all_affiliate_products()
     fb_posts = get_fb_posts()
 
-    # Metrics
+    # Core Metrics
     total_ws_count = len(worksheets)
     total_aff_count = len(affiliates)
     total_fb_count = len(fb_posts)
@@ -193,140 +120,139 @@ def render_analytics_dashboard_module():
     projected_aff_rev = total_aff_count * 1250 if total_aff_count > 0 else 0.0
     total_projected_rev = projected_tpt_rev + projected_aff_rev
 
-    # Bento Grid Cards (Pastel 3D Tilt)
+    # Clean Bento Cards Row
     col1, col2, col3, col4 = st.columns(4)
     
     with col1:
         st.markdown(f"""
-        <div class="pastel-bento-card">
-            <div class="pastel-tag"><span class="pulse-dot"></span> 💰 REVENUE FORECAST</div>
-            <div class="pastel-value">฿{total_projected_rev:,.0f}</div>
-            <div class="pastel-sub">🎯 เป้าหมาย: ฿30,000 / เดือน</div>
+        <div class="clean-kpi-card">
+            <div class="clean-kpi-label">💰 ประมาณการรายได้รวม</div>
+            <div class="clean-kpi-value">฿{total_projected_rev:,.0f}</div>
+            <div class="clean-kpi-sub">🎯 เป้าหมาย: ฿30,000 / เดือน</div>
         </div>
         """, unsafe_allow_html=True)
 
     with col2:
         st.markdown(f"""
-        <div class="pastel-bento-card">
-            <div class="pastel-tag">📚 TPT CONTENT VAULT</div>
-            <div class="pastel-value">{total_ws_count} <span style="font-size:18px; color:#64748B;">สื่อ</span></div>
-            <div class="pastel-sub" style="color:#64748B;">เฉลี่ย ฿{avg_ws_price:.0f} / ชิ้น</div>
+        <div class="clean-kpi-card">
+            <div class="clean-kpi-label">📚 คลังสื่อการสอน TPT</div>
+            <div class="clean-kpi-value">{total_ws_count} <span style="font-size:18px; color:#64748B;">ชิ้น</span></div>
+            <div style="font-size:13px; color:#64748B; margin-top:6px;">เฉลี่ย ฿{avg_ws_price:.0f} / ชิ้น</div>
         </div>
         """, unsafe_allow_html=True)
 
     with col3:
         st.markdown(f"""
-        <div class="pastel-bento-card">
-            <div class="pastel-tag">🎬 SHOPEE REELS STUDIO</div>
-            <div class="pastel-value">{total_aff_count} <span style="font-size:18px; color:#64748B;">สินค้า</span></div>
-            <div class="pastel-sub" style="color:#64748B;">สคริปต์ป้ายยา 100%</div>
+        <div class="clean-kpi-card">
+            <div class="clean-kpi-label">🎬 คลังสินค้า Reels</div>
+            <div class="clean-kpi-value">{total_aff_count} <span style="font-size:18px; color:#64748B;">รายการ</span></div>
+            <div style="font-size:13px; color:#64748B; margin-top:6px;">พร้อมสคริปต์ 100%</div>
         </div>
         """, unsafe_allow_html=True)
 
     with col4:
         st.markdown(f"""
-        <div class="pastel-bento-card">
-            <div class="pastel-tag">🎛️ FB QUEUE PIPELINE</div>
-            <div class="pastel-value">{total_fb_count} <span style="font-size:18px; color:#64748B;">รายการ</span></div>
-            <div class="pastel-sub" style="color:#B45309;">⏳ รอตรวจ: {pending_count} รายการ</div>
+        <div class="clean-kpi-card">
+            <div class="clean-kpi-label">🎛️ คิวโพสต์ Facebook</div>
+            <div class="clean-kpi-value">{total_fb_count} <span style="font-size:18px; color:#64748B;">รายการ</span></div>
+            <div style="font-size:13px; color:#B45309; margin-top:6px;">⏳ รออนุมัติ: {pending_count} รายการ</div>
         </div>
         """, unsafe_allow_html=True)
 
     st.divider()
 
-    # Visual Pastel Analytics (Charts Section)
+    # Visual Analytics & Clean Funnel
     c_left, c_right = st.columns([6, 4])
     
     with c_left:
-        st.subheader("📈ประมาณการสัดส่วนรายได้ตามโมเดลธุรกิจ (Pastel Revenue Breakdown)")
+        st.subheader("📈 สัดส่วนรายได้ตามโมเดลธุรกิจ (Revenue Stream Breakdown)")
         
         rev_data = pd.DataFrame({
-            "โมเดลธุรกิจ": ["ขายใบงานสื่อการสอน TPT", "ค่าคอมมิชชั่น Shopee Affiliate (FB Reels)"],
+            "โมเดลธุรกิจ": ["ขายใบงานสื่อ TPT", "ค่าคอม Shopee Affiliate"],
             "คาดการณ์รายได้ (บาท)": [projected_tpt_rev, projected_aff_rev]
         })
 
-        chart_rev = alt.Chart(rev_data).mark_bar(cornerRadiusTopLeft=12, cornerRadiusTopRight=12).encode(
-            x=alt.X('โมเดลธุรกิจ:N', title=None, axis=alt.Axis(labelAngle=0, labelFont='Prompt', labelFontSize=12)),
+        chart_rev = alt.Chart(rev_data).mark_bar(cornerRadiusTopLeft=8, cornerRadiusTopRight=8).encode(
+            x=alt.X('โมเดลธุรกิจ:N', title=None, axis=alt.Axis(labelAngle=0, labelFont='Prompt', labelFontSize=13)),
             y=alt.Y('คาดการณ์รายได้ (บาท):Q', title="บาท"),
-            color=alt.Color('โมเดลธุรกิจ:N', scale=alt.Scale(range=['#8B5CF6', '#38BDF8']), legend=None),
+            color=alt.Color('โมเดลธุรกิจ:N', scale=alt.Scale(range=['#2563EB', '#059669']), legend=None),
             tooltip=['โมเดลธุรกิจ', 'คาดการณ์รายได้ (บาท)']
-        ).properties(height=280)
+        ).properties(height=260)
         
         st.altair_chart(chart_rev, use_container_width=True)
 
     with c_right:
-        st.subheader("📊 สถานะคิวคอนเทนต์ (Content Funnel Status)")
+        st.subheader("📊 สถานะคิวคอนเทนต์ (Content Funnel)")
         st.markdown(f"""
-        <div class="funnel-pastel-box">
-            <div class="funnel-pastel-item">
-                <span class="funnel-pastel-label">⏳ รอกรอง (Pending Approval)</span>
-                <span class="funnel-pastel-badge badge-pending-pastel">{pending_count} รายการ</span>
+        <div class="clean-funnel-box">
+            <div class="clean-funnel-item">
+                <span style="font-weight:700; color:#334155; font-size:14px;">⏳ รอกรองอนุมัติ (Pending)</span>
+                <span class="badge-pending">{pending_count} รายการ</span>
             </div>
-            <div class="funnel-pastel-item">
-                <span class="funnel-pastel-label">✅ อนุมัติแล้ว (Approved)</span>
-                <span class="funnel-pastel-badge badge-approved-pastel">{approved_count} รายการ</span>
+            <div class="clean-funnel-item">
+                <span style="font-weight:700; color:#334155; font-size:14px;">✅ อนุมัติเรียบร้อย (Approved)</span>
+                <span class="badge-approved">{approved_count} รายการ</span>
             </div>
-            <div class="funnel-pastel-item">
-                <span class="funnel-pastel-label">🚀 โพสต์เรียบร้อย (Published)</span>
-                <span class="funnel-pastel-badge badge-posted-pastel">{posted_count} รายการ</span>
+            <div class="clean-funnel-item">
+                <span style="font-weight:700; color:#334155; font-size:14px;">🚀 โพสต์ขึ้นเพจแล้ว (Published)</span>
+                <span class="badge-posted">{posted_count} รายการ</span>
             </div>
         </div>
         """, unsafe_allow_html=True)
 
     st.divider()
 
-    # Scrollytelling Report (Pastel Style)
-    st.subheader("📖 Scrollytelling: บทวิเคราะห์เชิงกลยุทธ์และการตัดสินใจธุรกิจ")
-    st.caption("การเล่าเรื่องผ่านข้อมูลพาสเทลหรูหรา สำหรับครูปอ")
+    # Clean Strategic Action Plan
+    st.subheader("📖 บทวิเคราะห์เชิงกลยุทธ์และการตัดสินใจธุรกิจ (Action Plan)")
 
     col_a, col_b = st.columns(2)
     with col_a:
         st.markdown("""
-        <div class="scrolly-pastel-card">
-            <div style="font-weight:800; color:#6D28D9; font-size:16px; margin-bottom:6px;">
+        <div class="clean-story-card">
+            <div style="font-weight:800; color:#1D4ED8; font-size:15px; margin-bottom:4px;">
                 💡 Chapter 1: โอกาสสร้างรายได้ตั้งต้น (Zero-to-One Strategy)
             </div>
-            <div style="color:#334155; font-size:14px; line-height:1.6;">
-                • <b>สร้างสื่อใบงาน ม.1 แรกในโมดูล 1:</b> เปิดตัวบน TPT Store และเพจ Facebook ห้องเรียนอารมณ์ดี<br>
-                • <b>เลือกของใช้ในบ้าน 1 ชิ้นในโมดูล 2:</b> สรุปสคริปต์ Reels 15-30 วินาที สร้างรายได้คอมมิชชั่นแรกทันที
+            <div style="color:#475569; font-size:14px; line-height:1.6;">
+                • <b>สร้างสื่อใบงาน ม.1 ในโมดูล 2:</b> เปิดตัวขายบน TPT Store และโปรโมตลงเพจ<br>
+                • <b>สร้างสคริปต์ Reels ในโมดูล 3:</b> ทำคลิป Reels 15-30 วิ ป้ายยาสินค้า Shopee
             </div>
         </div>
         """, unsafe_allow_html=True)
 
         st.markdown("""
-        <div class="scrolly-pastel-card">
-            <div style="font-weight:800; color:#6D28D9; font-size:16px; margin-bottom:6px;">
-                🎯 Chapter 2: การบริหารอัตราส่วนโพสต์ (Content Ratio)
+        <div class="clean-story-card">
+            <div style="font-weight:800; color:#1D4ED8; font-size:15px; margin-bottom:4px;">
+                🎯 Chapter 2: อัตราส่วนคอนเทนต์ที่เหมาะสม (70/30 Content Ratio)
             </div>
-            <div style="color:#334155; font-size:14px; line-height:1.6;">
-                • ควรรักษาอัตราส่วน <b>70% Reels ป้ายยา : 30% สื่อ TPT</b> เพื่อเพิ่ม Engagement และความน่าเชื่อถือ<br>
-                • ปล่อยคลิปในช่วง Peak Time (18:00 - 21:00 น.) เพื่อดึงยอดวิวสูงสุด
+            <div style="color:#475569; font-size:14px; line-height:1.6;">
+                • เน้นลงคลิป Reels ป้ายยา <b>70%</b> สลับกับใบงานสื่อการสอน <b>30%</b><br>
+                • ปล่อยคลิปเวลา 18:00 - 21:00 น. เพื่อยอด Engagement สูงสุด
             </div>
         </div>
         """, unsafe_allow_html=True)
 
     with col_b:
         st.markdown("""
-        <div class="scrolly-pastel-card">
-            <div style="font-weight:800; color:#6D28D9; font-size:16px; margin-bottom:6px;">
-                ⚡ Chapter 3: แผนการตัดสินใจเชิงกลยุทธ์ 4 ขั้นตอน (Action Plan)
+        <div class="clean-story-card">
+            <div style="font-weight:800; color:#1D4ED8; font-size:15px; margin-bottom:4px;">
+                ⚡ Chapter 3: แผนปฏิบัติงาน 4 ขั้นตอน (Action Steps)
             </div>
-            <div style="color:#334155; font-size:14px; line-height:1.6;">
-                <b>1. เคลียร์คิวโพสต์:</b> กด Approve คอนเทนต์ในโมดูล 3<br>
-                <b>2. ขยายหมวดสินค้า:</b> เพิ่มสินค้า Shopee อุปกรณ์โต๊ะครู<br>
-                <b>3. Bundle สื่อ TPT:</b> รวมชุดใบงานเพิ่มราคาขายเป็น ฿199<br>
-                <b>4. ระบบ Auto-Post:</b> ปล่อยให้ระบบยิงโพสต์ขึ้นเพจ 24 ชม.
+            <div style="color:#475569; font-size:14px; line-height:1.6;">
+                <b>1. เคลียร์คิว:</b> กด อนุมัติยิงโพสต์ขึ้นเพจในโมดูล 4<br>
+                <b>2. เพิ่มสินค้า:</b> เลือกของใช้ในบ้าน/โต๊ะครูมาทำสคริปต์ Reels<br>
+                <b>3. Bundle สื่อ:</b> รวมชุดใบงานเพิ่มราคาขายเป็น ฿199<br>
+                <b>4. ยิงโพสต์อัตโนมัติ:</b> ปล่อยระบบยิงโพสต์ 24 ชม.
             </div>
         </div>
         """, unsafe_allow_html=True)
 
         st.markdown("""
-        <div class="scrolly-pastel-card" style="border-left-color: #10B981; background: #F0FDF4;">
-            <div style="font-weight:800; color:#047857; font-size:16px; margin-bottom:6px;">
-                📈 Chapter 4: สรุปผลลัพธ์ที่คาดว่าจะได้รับ (Target Milestone)
+        <div class="clean-story-card" style="border-left-color: #059669; background: #F0FDF4;">
+            <div style="font-weight:800; color:#047857; font-size:15px; margin-bottom:4px;">
+                📈 Chapter 4: เป้าหมายรายได้ที่คาดว่าจะได้รับ
             </div>
             <div style="color:#166534; font-size:14px; line-height:1.6;">
-                สร้างคลังสื่อการสอน 10 ชิ้น + สคริปต์ Reels 10 ชิ้น ภายใน 30 วันแรก คาดการณ์สร้างรายได้เสริม <b>฿30,000+ / เดือน</b> ผ่านระบบอัตโนมัตินี้ครับ!
+                สร้างสื่อ TPT 10 ชิ้น + สคริปต์ Reels 10 ชิ้น ภายใน 30 วัน คาดการณ์สร้างรายได้เสริม <b>฿30,000+ / เดือน</b> ผ่านระบบอัตโนมัตินี้ครับ!
             </div>
         </div>
         """, unsafe_allow_html=True)
