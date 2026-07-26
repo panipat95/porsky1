@@ -9,18 +9,17 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# 2026 Silicon Valley Next-Gen Executive Design System (Ultra-High Contrast & Crisp Typography)
+# 🎨 ธีมฟ้า-ขาว สว่าง สดใส (Ultra-Bright Sky-Blue & Crisp White Theme)
+# แก้ไขปัญหาตัวอักษรกลืนกับพื้นหลัง 100% ด้วยสีสดใส คอนทราสต์สูง อ่านง่ายที่สุด
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700;800&display=swap');
     
-    /* Global Base & Ultra-Crisp Typography */
+    /* Global Base */
     html, body, [class*="css"], .stApp {
-        font-family: 'Prompt', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-        background-color: #F8FAFC !important; /* Pure Slate 50 */
-        color: #0F172A !important; /* Deep Slate 900 */
-        -webkit-font-smoothing: antialiased !important;
-        -moz-osx-font-smoothing: grayscale !important;
+        font-family: 'Prompt', -apple-system, sans-serif !important;
+        background-color: #F0F9FF !important; /* Sky 50 สว่าง สดใส */
+        color: #0F172A !important;
     }
     
     .main .block-container {
@@ -29,104 +28,123 @@ st.markdown("""
         max-width: 1440px;
     }
 
-    /* Next-Gen Deep Slate Indigo Sidebar */
+    /* สว่าง คมชัด: Sidebar โทนฟ้าสดใส */
     section[data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #0F172A 0%, #1E293B 100%) !important;
-        border-right: 1px solid #334155 !important;
-        box-shadow: 4px 0 30px rgba(15, 23, 42, 0.15);
+        background: linear-gradient(180deg, #0284C7 0%, #0369A1 100%) !important;
+        border-right: 2px solid #0284C7 !important;
+        box-shadow: 4px 0 20px rgba(2, 132, 199, 0.15) !important;
     }
     
+    /* บังคับสีตัวอักษรทุกตัวใน Sidebar เป็นสีขาวสว่าง 100% คมชัด */
     section[data-testid="stSidebar"] * {
+        color: #FFFFFF !important;
         font-family: 'Prompt', sans-serif !important;
+        opacity: 1 !important;
     }
 
-    /* Brand Header Box in Sidebar */
-    .brand-card-2026 {
-        background: rgba(255, 255, 255, 0.06);
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        border-radius: 18px;
-        padding: 18px;
-        margin-bottom: 22px;
-        backdrop-filter: blur(12px);
-        display: flex;
-        align-items: center;
-        gap: 14px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    /* Brand Header Box ด้านซ้าย (การ์ดสีขาวบริสุทธิ์ คอนทราสต์สูงสุด) */
+    .brand-card-bright {
+        background: #FFFFFF !important;
+        border: 2px solid #E0F2FE !important;
+        border-radius: 18px !important;
+        padding: 18px !important;
+        margin-bottom: 20px !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 14px !important;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
     }
     
-    .brand-avatar-2026 {
-        width: 50px;
-        height: 50px;
+    .brand-card-bright * {
+        color: #0F172A !important;
+    }
+
+    .brand-avatar-bright {
+        width: 48px;
+        height: 48px;
         border-radius: 14px;
-        background: linear-gradient(135deg, #2563EB 0%, #0284C7 100%);
-        color: #FFFFFF;
+        background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+        color: #FFFFFF !important;
         font-weight: 800;
         font-size: 20px;
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 0 15px rgba(37, 99, 235, 0.6);
-        border: 1px solid rgba(255, 255, 255, 0.4);
+        box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
     }
 
-    .brand-title-2026 {
-        font-size: 19px;
+    .brand-title-bright {
+        font-size: 18px;
         font-weight: 800;
-        color: #FFFFFF !important;
+        color: #0369A1 !important;
         line-height: 1.2;
-        letter-spacing: -0.3px;
     }
 
-    .brand-subtitle-2026 {
-        font-size: 13px;
-        color: #94A3B8 !important;
-        font-weight: 500;
+    .brand-subtitle-bright {
+        font-size: 12px;
+        color: #64748B !important;
+        font-weight: 600;
     }
 
-    .brand-status-2026 {
+    .brand-status-bright {
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        background: rgba(16, 185, 129, 0.2);
-        border: 1px solid rgba(52, 211, 153, 0.5);
-        color: #34D399 !important;
+        background: #D1FAE5 !important;
+        border: 1px solid #A7F3D0 !important;
+        color: #047857 !important;
         font-size: 11px;
         font-weight: 700;
-        padding: 3px 12px;
-        border-radius: 20px;
-        margin-top: 6px;
+        padding: 3px 10px;
+        border-radius: 16px;
+        margin-top: 4px;
     }
 
-    /* Sidebar Radio Buttons Styling */
+    /* ปรับแต่ง ปุ่มเมนู Radio Buttons ให้สว่าง ตัวอักษรใหญ่ คมกริบ */
     section[data-testid="stSidebar"] .stRadio label {
-        color: #F1F5F9 !important;
-        font-size: 15px !important;
-        font-weight: 600 !important;
-        padding: 12px 16px !important;
-        border-radius: 12px !important;
-        transition: all 0.2s ease !important;
+        background: rgba(255, 255, 255, 0.15) !important;
+        border: 1px solid rgba(255, 255, 255, 0.3) !important;
+        border-radius: 14px !important;
+        padding: 12px 18px !important;
+        margin-bottom: 6px !important;
+        cursor: pointer !important;
     }
 
-    section[data-testid="stSidebar"] .stRadio label:hover {
-        background: rgba(255, 255, 255, 0.1) !important;
-        color: #38BDF8 !important;
+    section[data-testid="stSidebar"] .stRadio label p,
+    section[data-testid="stSidebar"] .stRadio label span {
+        color: #FFFFFF !important;
+        font-size: 15px !important;
+        font-weight: 700 !important;
+    }
+
+    /* เมนูที่ถูกเลือก (Active Card): การ์ดสีขาวบริสุทธิ์ ตัวอักษรสีฟ้าเข้ม อ่านง่าย 100% */
+    section[data-testid="stSidebar"] .stRadio div[aria-checked="true"] label {
+        background: #FFFFFF !important;
+        border-color: #FFFFFF !important;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2) !important;
+    }
+
+    section[data-testid="stSidebar"] .stRadio div[aria-checked="true"] label p,
+    section[data-testid="stSidebar"] .stRadio div[aria-checked="true"] label span {
+        color: #0284C7 !important;
+        font-weight: 800 !important;
     }
 
     /* Top Live Notification Bar */
-    .notif-hub-card {
+    .notif-bar-bright {
         background: #FFFFFF;
-        border: 1px solid #E2E8F0;
-        border-left: 6px solid #2563EB;
+        border: 1px solid #E0F2FE;
+        border-left: 6px solid #0284C7;
         border-radius: 16px;
-        padding: 18px 24px;
+        padding: 16px 24px;
         margin-bottom: 24px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        box-shadow: 0 10px 30px -10px rgba(37, 99, 235, 0.08);
+        box-shadow: 0 6px 20px rgba(2, 132, 199, 0.06);
     }
 
-    .notif-text {
+    .notif-text-bright {
         font-size: 15px;
         font-weight: 700;
         color: #0F172A;
@@ -135,7 +153,7 @@ st.markdown("""
         gap: 10px;
     }
 
-    .notif-tag {
+    .notif-tag-bright {
         background: #FEF3C7;
         border: 1px solid #FDE68A;
         color: #B45309;
@@ -163,10 +181,10 @@ init_db()
 fb_posts = get_fb_posts()
 pending_posts = [p for p in fb_posts if p['status'] == 'pending_approval']
 
-# Top Live Notification Hub Bar (2026 Executive Style)
+# Top Live Notification Hub Bar (Bright Executive Style)
 st.markdown(f"""
-<div class="notif-hub-card">
-    <div class="notif-text">
+<div class="notif-bar-bright">
+    <div class="notif-text-bright">
         <span style="font-size:20px;">🔔</span>
         <span><b>ศูนย์แจ้งเตือนด่วน (Live Notification Center):</b></span>
         <span style="color:#475569; font-weight:500;">
@@ -174,27 +192,26 @@ st.markdown(f"""
         </span>
     </div>
     <div>
-        <span class="notif-tag">⏳ คอนเทนต์รอกรองอนุมัติ: {len(pending_posts)} รายการ</span>
+        <span class="notif-tag-bright">⏳ คอนเทนต์รอกรองอนุมัติ: {len(pending_posts)} รายการ</span>
     </div>
 </div>
 """, unsafe_allow_html=True)
 
-# Brand Header Box in Sidebar
+# Brand Header Box in Sidebar (White Card with Ocean Blue Text)
 st.sidebar.markdown("""
-<div class="brand-card-2026">
-    <div class="brand-avatar-2026">KP</div>
+<div class="brand-card-bright">
+    <div class="brand-avatar-bright">KP</div>
     <div>
-        <div class="brand-title-2026">ครูปอ Ecosystem</div>
-        <div class="brand-subtitle-2026">Executive Content Studio</div>
-        <div class="brand-status-2026">
-            <span style="width:7px; height:7px; border-radius:50%; background:#34D399; display:inline-block;"></span>
-            LIVE: ห้องเรียนอารมณ์ดี
+        <div class="brand-title-bright">ครูปอ Ecosystem</div>
+        <div class="brand-subtitle-bright">Executive Content Studio</div>
+        <div class="brand-status-bright">
+            🟢 LIVE: ห้องเรียนอารมณ์ดี
         </div>
     </div>
 </div>
 """, unsafe_allow_html=True)
 
-st.sidebar.markdown("<p style='font-size:12px; font-weight:800; color:#64748B !important; letter-spacing:1.5px; margin-bottom:10px; margin-left:4px;'>NAVIGATION MENU</p>", unsafe_allow_html=True)
+st.sidebar.markdown("<p style='font-size:12px; font-weight:800; color:#E0F2FE !important; letter-spacing:1.5px; margin-bottom:10px; margin-left:4px;'>NAVIGATION MENU</p>", unsafe_allow_html=True)
 
 menu = st.sidebar.radio(
     "เลือกเมนูการทำงาน:",
@@ -210,7 +227,7 @@ menu = st.sidebar.radio(
 )
 
 st.sidebar.divider()
-st.sidebar.caption("ครูปอ All-in-One Next-Gen Ecosystem v2.5")
+st.sidebar.caption("ครูปอ All-in-One Bright Sky Edition v3.0")
 
 # Route to selected module
 if menu == "📊 หน้าหลัก & บทวิเคราะห์ธุรกิจ":
