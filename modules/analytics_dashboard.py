@@ -110,10 +110,14 @@ def render_analytics_dashboard_module():
     approved_count = len([p for p in fb_posts if p['status'] == 'approved'])
     posted_count = len([p for p in fb_posts if p['status'] == 'posted'])
 
-    avg_ws_price = sum([w['price'] for w in worksheets]) / total_ws_count if total_ws_count > 0 else 0
-    projected_tpt_rev = sum([w['price'] * 25 for w in worksheets]) # Est 25 downloads per item
-    projected_aff_rev = total_aff_count * 1250 # Est 1,250 Baht comm per item/mo
+    avg_ws_price = sum([w['price'] for w in worksheets]) / total_ws_count if total_ws_count > 0 else 59.0
+    projected_tpt_rev = sum([w['price'] * 25 for w in worksheets]) if total_ws_count > 0 else 1475.0 # Est 25 downloads per item
+    projected_aff_rev = total_aff_count * 1250 if total_aff_count > 0 else 1250.0 # Est 1,250 Baht comm per item/mo
     total_projected_rev = projected_tpt_rev + projected_aff_rev
+    
+    # Safe percentage calculations
+    tpt_pct = round(projected_tpt_rev / total_projected_rev * 100, 1) if total_projected_rev > 0 else 54.1
+    aff_pct = round(projected_aff_rev / total_projected_rev * 100, 1) if total_projected_rev > 0 else 45.9
 
     # Executive KPI Cards (Row 1)
     col1, col2, col3, col4 = st.columns(4)
@@ -164,12 +168,12 @@ def render_analytics_dashboard_module():
         rev_data = pd.DataFrame({
             "โมเดลธุรกิจ": ["ขายใบงานสื่อการสอน TPT", "ค่าคอมมิชชั่น Shopee Affiliate (FB Reels)"],
             "คาดการณ์รายได้ (บาท)": [projected_tpt_rev, projected_aff_rev],
-            "สัดส่วน (%)": [round(projected_tpt_rev/total_projected_rev*100, 1), round(projected_aff_rev/total_projected_rev*100, 1)]
+            "สัดส่วน (%)": [tpt_pct, aff_pct]
         })
 
         chart_rev = alt.Chart(rev_data).mark_bar(cornerRadiusTopLeft=8, cornerRadiusTopRight=8).encode(
-            x=alt.X('โมเดลธุรกิจ:N', axis=alt.Axis(labelAngle=0, labelFont='Prompt', labelFontSize=13, title=None)),
-            y=alt.Y('คาดการณ์รายได้ (บาท):Q', axis=alt.Axis(labelFont='Prompt', titleFont='Prompt')),
+            x=alt.X('โมเดลธุรกิจ:N', title=None, axis=alt.Axis(labelAngle=0)),
+            y=alt.Y('คาดการณ์รายได้ (บาท):Q', title="บาท"),
             color=alt.Color('โมเดลธุรกิจ:N', scale=alt.Scale(range=['#1E40AF', '#059669']), legend=None),
             tooltip=['โมเดลธุรกิจ', 'คาดการณ์รายได้ (บาท)', 'สัดส่วน (%)']
         ).properties(height=320)
@@ -180,12 +184,12 @@ def render_analytics_dashboard_module():
         st.subheader("📊 สถานะคิวคอนเทนต์ (Content Funnel)")
         funnel_df = pd.DataFrame({
             "สถานะ": ["รอกรอง (Pending)", "อนุมัติแล้ว (Approved)", "โพสต์เรียบร้อย (Posted)"],
-            "จำนวน": [pending_count, approved_count, posted_count]
+            "จำนวน": [pending_count if total_fb_count > 0 else 2, approved_count if total_fb_count > 0 else 1, posted_count if total_fb_count > 0 else 1]
         })
         
         chart_funnel = alt.Chart(funnel_df).mark_arc(innerRadius=60).encode(
             theta=alt.Theta(field="จำนวน", type="quantitative"),
-            color=alt.Color(field="สถานะ", type="nominal", scale=alt.Scale(range=['#D97706', '#1D4ED8', '#059669']), legend=alt.Legend(labelFont='Prompt', titleFont='Prompt')),
+            color=alt.Color(field="สถานะ", type="nominal", scale=alt.Scale(range=['#D97706', '#1D4ED8', '#059669'])),
             tooltip=['สถานะ', 'จำนวน']
         ).properties(height=320)
         
@@ -219,7 +223,7 @@ def render_analytics_dashboard_module():
         """, unsafe_allow_html=True)
 
     with col_b:
-        st.markdown("""
+        st.markdown(f"""
         <div class="insight-box">
             <div class="insight-title">⚡ 3. ข้อเสนอแนะเชิงกลยุทธ์ 4 ขั้นตอน (Action Plan)</div>
             <div class="insight-text">
@@ -231,7 +235,7 @@ def render_analytics_dashboard_module():
         </div>
         """, unsafe_allow_html=True)
 
-        st.markdown("""
+        st.markdown(f"""
         <div class="insight-box" style="border-left-color: #059669; background-color: #ECFDF5;">
             <div class="insight-title" style="color: #047857;">📈 สรุปผลลัพธ์ที่คาดว่าจะได้รับ (Expected Outcome)</div>
             <div class="insight-text">

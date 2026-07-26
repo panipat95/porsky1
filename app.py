@@ -41,6 +41,7 @@ from modules.analytics_dashboard import render_analytics_dashboard_module
 from modules.student_care_tpt import render_student_care_tpt_module
 from modules.shopee_affiliate import render_shopee_affiliate_module
 from modules.fb_page_manager import render_fb_page_manager_module
+from modules.fb_page_status import render_fb_page_status_module
 
 # Initialize Database Schema
 init_db()
@@ -55,7 +56,8 @@ menu = st.sidebar.radio(
         "📊 หน้าหลัก & บทวิเคราะห์ธุรกิจ",
         "🎓 1. ผลิตสื่อ ม.1 & ใบงาน TPT",
         "🎬🛒 2. FB Reels & Shopee Affiliate",
-        "🎛️ 3. ศูนย์คุมเพจ (FB Page Manager)"
+        "🎛️ 3. ศูนย์คุมเพจ (FB Page Manager)",
+        "📘 4. สถานะ & สถิติเพจ Facebook"
     ]
 )
 
@@ -66,6 +68,7 @@ st.sidebar.info("""
 - **🎓 โมดูล 1:** เจนใบงาน ม.1 ด้วย AI & ออกไฟล์ PDF
 - **🎬🛒 โมดูล 2:** เจนสคริปต์ Facebook Reels + แคปชั่น Affiliate
 - **🎛️ โมดูล 3:** ตรวจพรีวิวโพสต์ อนุมัติยิงโพสต์ขึ้น Facebook
+- **📘 โมดูล 4:** ดูสถานะเพจสด ประวัติโพสต์ & การเชื่อมโยงทั้งหมด
 """)
 
 # Route to selected module
@@ -80,3 +83,6 @@ elif menu == "🎬🛒 2. FB Reels & Shopee Affiliate":
 
 elif menu == "🎛️ 3. ศูนย์คุมเพจ (FB Page Manager)":
     render_fb_page_manager_module()
+
+elif menu == "📘 4. สถานะ & สถิติเพจ Facebook":
+    render_fb_page_status_module()
