@@ -1,10 +1,11 @@
 import streamlit as st
 import pandas as pd
+import html
 from models.database import get_fb_posts, update_fb_post_status, update_fb_post_content
 from utils.facebook_api import post_to_facebook_page
 
 def render_fb_page_manager_module():
-    st.title("🎛️ โมดูล 3: Facebook Page Manager Dashboard (CEO Room)")
+    st.title("🎛️ โมดูล 4: Facebook Page Manager Dashboard (CEO Room)")
     st.caption("ศูนย์กลางสำหรับครูปอ ตรวจสอบ อนุมัติ และจัดรูปแบบคอนเทนต์ก่อนยิงขึ้นเพจ Facebook")
     
     # Overview Metrics
@@ -34,7 +35,7 @@ def render_fb_page_manager_module():
         target_posts = all_posts
         
     if not target_posts:
-        st.info("ไม่มีรายการคอนเทนต์ในหมวดหมู่นี้ครับ คุณครูสามารถสร้างเนื้อหาใหม่ได้ที่ โมดูล 1 หรือ โมดูล 2")
+        st.info("ไม่มีรายการคอนเทนต์ในหมวดหมู่นี้ครับ คุณครูสามารถสร้างเนื้อหาใหม่ได้ที่ โมดูล 2 หรือ โมดูล 3")
         return
         
     st.subheader(f"📋 รายการคอนเทนต์ ({len(target_posts)} รายการ)")
@@ -61,20 +62,22 @@ def render_fb_page_manager_module():
                     
             with col_preview:
                 st.markdown("**📱 พรีวิวการแสดงผลบน Facebook Page**")
-                # Custom CSS simulated FB Post Card
+                # Escaped text to prevent Markdown/HTML injection glitches
+                safe_preview_text = html.escape(edited_text).replace('\n', '<br>')
+                
                 st.markdown(f"""
-                <div style="background-color: #18191a; color: #e4e6eb; border-radius: 8px; padding: 16px; font-family: sans-serif; border: 1px solid #3a3b3c;">
+                <div style="background-color: #18191a; color: #e4e6eb; border-radius: 12px; padding: 18px; font-family: 'Prompt', sans-serif; border: 1px solid #3a3b3c;">
                     <div style="display: flex; align-items: center; margin-bottom: 12px;">
-                        <div style="width: 40px; height: 40px; border-radius: 50%; background-color: #0866ff; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 10px;">
+                        <div style="width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, #0866ff, #0052cc); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 12px; font-size: 16px;">
                             KP
                         </div>
                         <div>
-                            <div style="font-weight: bold; color: #e4e6eb;">ห้องเรียนอารมณ์ดี</div>
+                            <div style="font-weight: bold; color: #e4e6eb; font-size: 15px;">ห้องเรียนอารมณ์ดี</div>
                             <div style="font-size: 12px; color: #b0b3b8;">เมื่อสักครู่ · 🌐 Public</div>
                         </div>
                     </div>
-                    <div style="white-space: pre-wrap; font-size: 14px; line-height: 1.5; color: #e4e6eb;">
-{edited_text}
+                    <div style="font-size: 14px; line-height: 1.6; color: #e4e6eb;">
+                        {safe_preview_text}
                     </div>
                 </div>
                 """, unsafe_allow_html=True)

@@ -9,11 +9,12 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Ultra-Clean Streamlined Modern Minimalist System
+# 🎨 Pristine Clean Color System (Strictly scoped, zero wildcard conflicts)
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700;800&display=swap');
     
+    /* Base Canvas */
     html, body, [class*="css"], .stApp {
         font-family: 'Prompt', -apple-system, sans-serif !important;
         background-color: #F8FAFC !important; /* Pure Slate 50 */
@@ -26,22 +27,15 @@ st.markdown("""
         max-width: 1300px;
     }
 
-    /* Clean Royal Navy Sidebar */
+    /* Royal Navy Sidebar */
     section[data-testid="stSidebar"] {
-        background: #0F172A !important;
+        background-color: #0F172A !important;
         border-right: 1px solid #1E293B !important;
     }
     
-    section[data-testid="stSidebar"] p,
-    section[data-testid="stSidebar"] label,
-    section[data-testid="stSidebar"] span {
-        color: #F8FAFC !important;
-        font-family: 'Prompt', sans-serif !important;
-    }
-
     /* Clean Brand Header Card */
-    .clean-brand-card {
-        background: #1E293B;
+    .brand-card-pristine {
+        background-color: #1E293B;
         border: 1px solid #334155;
         border-radius: 16px;
         padding: 16px;
@@ -51,11 +45,11 @@ st.markdown("""
         gap: 12px;
     }
 
-    .clean-brand-avatar {
+    .avatar-pristine {
         width: 44px;
         height: 44px;
         border-radius: 12px;
-        background: #2563EB;
+        background-color: #2563EB;
         color: #FFFFFF !important;
         font-weight: 800;
         font-size: 18px;
@@ -64,19 +58,20 @@ st.markdown("""
         justify-content: center;
     }
 
-    .clean-brand-title {
+    .title-pristine {
         font-size: 17px;
         font-weight: 800;
         color: #FFFFFF !important;
         line-height: 1.2;
     }
 
-    .clean-brand-subtitle {
+    .subtitle-pristine {
         font-size: 12px;
         color: #94A3B8 !important;
+        font-weight: 500;
     }
 
-    .clean-brand-status {
+    .status-pristine {
         display: inline-flex;
         align-items: center;
         gap: 6px;
@@ -89,25 +84,40 @@ st.markdown("""
         margin-top: 4px;
     }
 
-    /* Clean Active Menu Pill */
+    /* Clean Sidebar Navigation Radio Buttons */
     section[data-testid="stSidebar"] .stRadio label {
-        background: rgba(255, 255, 255, 0.05) !important;
-        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        background-color: #1E293B !important;
+        border: 1px solid #334155 !important;
         border-radius: 12px !important;
         padding: 12px 16px !important;
-        margin-bottom: 6px !important;
+        margin-bottom: 8px !important;
         cursor: pointer !important;
     }
 
+    section[data-testid="stSidebar"] .stRadio label p,
+    section[data-testid="stSidebar"] .stRadio label span {
+        color: #F8FAFC !important;
+        font-size: 15px !important;
+        font-weight: 700 !important;
+    }
+
+    /* Active Selected Radio Item */
     section[data-testid="stSidebar"] .stRadio div[aria-checked="true"] label {
-        background: #2563EB !important;
+        background-color: #2563EB !important;
         border-color: #3B82F6 !important;
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3) !important;
     }
 
     section[data-testid="stSidebar"] .stRadio div[aria-checked="true"] label p,
     section[data-testid="stSidebar"] .stRadio div[aria-checked="true"] label span {
         color: #FFFFFF !important;
         font-weight: 800 !important;
+    }
+
+    /* Restore Streamlit System Collapse Icon */
+    button[data-testid="stSidebarCollapseButton"] *,
+    [data-testid="stSidebarHeader"] * {
+        font-family: 'Material Symbols Outlined', 'Material Icons', sans-serif !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -122,14 +132,14 @@ from modules.fb_page_manager import render_fb_page_manager_module
 # Initialize Database Schema
 init_db()
 
-# Clean Brand Header Card in Sidebar
+# Brand Header Box in Sidebar
 st.sidebar.markdown("""
-<div class="clean-brand-card">
-    <div class="clean-brand-avatar">KP</div>
+<div class="brand-card-pristine">
+    <div class="avatar-pristine">KP</div>
     <div>
-        <div class="clean-brand-title">ครูปอ Ecosystem</div>
-        <div class="clean-brand-subtitle">Executive Content Studio</div>
-        <div class="clean-brand-status">
+        <div class="title-pristine">ครูปอ Ecosystem</div>
+        <div class="subtitle-pristine">Executive Content Studio</div>
+        <div class="status-pristine">
             🟢 LIVE: ห้องเรียนอารมณ์ดี
         </div>
     </div>
@@ -150,7 +160,7 @@ menu = st.sidebar.radio(
 )
 
 st.sidebar.divider()
-st.sidebar.caption("ครูปอ All-in-One Streamlined Core v5.0")
+st.sidebar.caption("ครูปอ All-in-One Executive Studio v5.1")
 
 # Route to selected core module
 if menu == "📊 1. หน้าหลัก & แดชบอร์ดสรุปรายได้":
