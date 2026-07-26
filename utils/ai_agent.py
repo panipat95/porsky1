@@ -1,10 +1,46 @@
 """
 AI Agent Utility Module for Kru Por's All-in-One Ecosystem
 Provides structured AI generation for Worksheets, FB Reels Scripts, and FB Captions.
+Supports LM Studio Local Model (http://127.0.0.1:1234), Gemini API, and smart template fallbacks.
 """
 
+import requests
+import json
+import os
+
+LM_STUDIO_URL = os.getenv("LM_STUDIO_URL", "http://127.0.0.1:1234/v1/chat/completions")
+
+def call_lm_studio(prompt: str, system_prompt: str = "คุณคือ AI ผู้ช่วยครูปอ") -> str:
+    """เรียกใช้งาน LM Studio Local Model บนเครื่องตัวเอง (http://127.0.0.1:1234)"""
+    try:
+        payload = {
+            "messages": [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": prompt}
+            ],
+            "temperature": 0.7,
+            "max_tokens": 1500
+        }
+        headers = {"Content-Type": "application/json"}
+        r = requests.post(LM_STUDIO_URL, json=payload, headers=headers, timeout=5)
+        if r.status_code == 200:
+            res_json = r.json()
+            return res_json.get("choices", [{}])[0].get("message", {}).get("content", "")
+    except Exception:
+        pass
+    return None
+
+
 def generate_tpt_worksheet(subject: str, topic: str, grade_level: str = "ม.1") -> str:
-    """จำลอง/เรียกใช้ AI ในการสร้างใบงานและสื่อการสอน"""
+    """สร้างใบงานและสื่อการสอน ม.1 (รองรับ LM Studio Local AI + Fallback)"""
+    
+    # Try LM Studio Local Model first
+    lm_prompt = f"สร้างใบงานวิชา {subject} เรื่อง {topic} สำหรับนักเรียน {grade_level} แบ่งเป็น 2 ตอน คือตอนตอบคำถามชวนคิด และตอนกิจกรรมกลุ่ม"
+    lm_result = call_lm_studio(lm_prompt, system_prompt="คุณคือผู้เชี่ยวชาญการออกแบบสื่อการสอน ม.1 ของครูปอ")
+    if lm_result:
+        return lm_result
+
+    # Fallback to Smart Template
     content = f"""# ใบงานเรื่อง: {topic}
 **วิชา:** {subject} | **ระดับชั้น:** {grade_level}
 
@@ -41,6 +77,17 @@ def generate_tpt_worksheet(subject: str, topic: str, grade_level: str = "ม.1")
 def generate_fb_reels_script(product_name: str, key_features: str, price: str = "") -> dict:
     """สร้างสคริปต์ Facebook Reels (15-30 วินาที) พร้อมแคปชั่นป้ายยาสำหรับ FB Reels"""
     
+    # Try LM Studio Local Model first
+    lm_prompt = f"แต่งสคริปต์ Facebook Reels (15-30 วินาที) ป้ายยาสินค้า '{product_name}' จุดเด่น: '{key_features}' ราคา: '{price}' พร้อมแคปชั่นและลิงก์ Affiliate"
+    lm_result = call_lm_studio(lm_prompt, system_prompt="คุณคือคอปปี้ไรเตอร์สายป้ายยา Facebook Reels ของครูปอ")
+    
+    if lm_result:
+        return {
+            "script": lm_result,
+            "caption": f"✨ ป้ายยาของดีต้องมีติดบ้าน! 🏡🔥\n\n{product_name}\n\n[AFFILIATE_LINK_PLACEHOLDER]\n\n#FacebookReels #Reels #ShopeeAffiliate #ครูปอป้ายยา"
+        }
+
+    # Fallback to Smart Template
     script = f"""🎬 **สคริปต์ Facebook Reels (15-30 วินาที): {product_name}**
 
 ⏱️ **00:00 - 00:03 (Hook หยุดฟีด FB):**

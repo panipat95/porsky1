@@ -2,14 +2,17 @@
 .env
 *.env
 
-# SQLite Database (จะสร้างอัตโนมัติเมื่อรันบน Cloud)
+# SQLite Database
 *.db
 database.db
 
-# Python Cache & Executables
+# Python & Node Dependencies
 __pycache__/
 *.pyc
 *.pyo
 .venv/
 env/
 exports/
+node_modules/
+Agent-office-thai/node_modules/
+Agent-office-thai/.next/
