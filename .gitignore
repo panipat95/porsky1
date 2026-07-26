@@ -1,0 +1,15 @@
+# Environment & Secrets (ป้องกันรหัสผ่านหลุด)
+.env
+*.env
+
+# SQLite Database (จะสร้างอัตโนมัติเมื่อรันบน Cloud)
+*.db
+database.db
+
+# Python Cache & Executables
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+env/
+exports/
