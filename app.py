@@ -9,28 +9,22 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Advanced 7-Skills Master Web Design System (Custom CSS Injection)
+# Sky-Blue & Pure White Design System (Custom CSS Injection)
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap');
     
-    /* 1. Kinetic Animations Keyframes */
-    @keyframes textShimmer {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
-    
+    /* 1. Kinetic Animations */
     @keyframes statusGlow {
-        0% { box-shadow: 0 0 5px rgba(52, 211, 153, 0.4); }
-        50% { box-shadow: 0 0 15px rgba(52, 211, 153, 0.9); }
-        100% { box-shadow: 0 0 5px rgba(52, 211, 153, 0.4); }
+        0% { box-shadow: 0 0 5px rgba(255, 255, 255, 0.4); }
+        50% { box-shadow: 0 0 15px rgba(255, 255, 255, 0.9); }
+        100% { box-shadow: 0 0 5px rgba(255, 255, 255, 0.4); }
     }
 
     /* Global Canvas */
     html, body, [class*="css"], .stApp {
         font-family: 'Prompt', -apple-system, sans-serif !important;
-        background-color: #F8FAFC;
+        background-color: #F0F9FF; /* Sky 50 */
     }
     
     .main .block-container {
@@ -39,23 +33,22 @@ st.markdown("""
         max-width: 1400px;
     }
 
-    /* 2. Glassmorphism Ultra-Modern Sidebar */
+    /* Sky-Blue & White Premium Sidebar */
     section[data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #0B132B 0%, #1C2541 100%) !important;
-        border-right: 1px solid rgba(255, 255, 255, 0.08);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
+        background: linear-gradient(180deg, #0284C7 0%, #0369A1 100%) !important;
+        border-right: 1px solid #0284C7;
+        box-shadow: 4px 0 25px rgba(2, 132, 199, 0.15);
     }
     
     section[data-testid="stSidebar"] * {
-        color: #F8FAFC !important;
+        color: #FFFFFF !important;
         font-family: 'Prompt', sans-serif !important;
     }
 
-    /* 3. Bento Glass Brand Card */
+    /* Brand Header Box in Sidebar */
     .sidebar-brand-card {
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.3);
         border-radius: 20px;
         padding: 20px;
         margin-bottom: 24px;
@@ -63,22 +56,21 @@ st.markdown("""
         display: flex;
         align-items: center;
         gap: 14px;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     }
 
     .brand-avatar {
         width: 52px;
         height: 52px;
         border-radius: 16px;
-        background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
-        color: #FFFFFF;
+        background: #FFFFFF;
+        color: #0284C7;
         font-weight: 800;
         font-size: 20px;
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 0 20px rgba(37, 99, 235, 0.6);
-        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
     }
 
     .brand-title {
@@ -90,17 +82,17 @@ st.markdown("""
 
     .brand-subtitle {
         font-size: 12px;
-        color: #94A3B8 !important;
+        color: #E0F2FE !important;
     }
 
-    /* 4. Micro-interactions: Live Status Pill */
+    /* Live Status Pill */
     .live-status-pill {
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        background: rgba(5, 150, 105, 0.25);
-        border: 1px solid rgba(52, 211, 153, 0.5);
-        color: #34D399 !important;
+        background: rgba(255, 255, 255, 0.25);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        color: #FFFFFF !important;
         font-size: 11px;
         font-weight: 700;
         padding: 4px 12px;
@@ -113,41 +105,46 @@ st.markdown("""
         width: 8px;
         height: 8px;
         border-radius: 50%;
-        background-color: #34D399;
+        background-color: #FFFFFF;
     }
 
-    /* 5. Modern Navigation Items */
+    /* Modern Navigation Radio Buttons */
     section[data-testid="stSidebar"] .stRadio > div {
         gap: 10px;
     }
 
     section[data-testid="stSidebar"] .stRadio label {
-        background: rgba(255, 255, 255, 0.04);
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: 14px !important;
         padding: 14px 18px !important;
         transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
         cursor: pointer;
-        font-weight: 500 !important;
+        font-weight: 600 !important;
     }
 
     section[data-testid="stSidebar"] .stRadio label:hover {
-        background: rgba(255, 255, 255, 0.1) !important;
-        border-color: #60A5FA !important;
+        background: rgba(255, 255, 255, 0.25) !important;
+        border-color: #FFFFFF !important;
         transform: translateX(6px);
-        box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
     }
 
     section[data-testid="stSidebar"] .stRadio div[aria-checked="true"] label {
-        background: linear-gradient(135deg, #1E40AF 0%, #2563EB 100%) !important;
-        border-color: #93C5FD !important;
-        box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4) !important;
-        font-weight: 700 !important;
+        background: #FFFFFF !important;
+        color: #0284C7 !important;
+        border-color: #FFFFFF !important;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2) !important;
+        font-weight: 800 !important;
+    }
+
+    section[data-testid="stSidebar"] .stRadio div[aria-checked="true"] label * {
+        color: #0284C7 !important;
     }
 
     /* Dividers */
     hr {
-        border-color: #E2E8F0 !important;
+        border-color: #E0F2FE !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -177,7 +174,7 @@ st.sidebar.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-st.sidebar.markdown("<p style='font-size:12px; font-weight:700; color:#94A3B8 !important; letter-spacing:1.2px; margin-left:4px;'>NAVIGATION MENU</p>", unsafe_allow_html=True)
+st.sidebar.markdown("<p style='font-size:12px; font-weight:700; color:#E0F2FE !important; letter-spacing:1.2px; margin-left:4px;'>NAVIGATION MENU</p>", unsafe_allow_html=True)
 
 menu = st.sidebar.radio(
     "เลือกโมดูลการทำงาน:",
@@ -194,9 +191,9 @@ menu = st.sidebar.radio(
 st.sidebar.markdown("<br>", unsafe_allow_html=True)
 st.sidebar.info("""
 💡 **7 Design Paradigms Active:**
-- Scrollytelling & 3D Tilt Cards
-- Bento Grid & Glassmorphism
-- Kinetic Typography & Micro-interactions
+- Sky-Blue & Pure White Theme
+- Scrollytelling & Bento Grid
+- Glassmorphism & Micro-interactions
 """)
 
 # Route to selected module
