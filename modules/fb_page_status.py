@@ -46,7 +46,7 @@ def render_fb_page_status_module():
     page_info = fetch_facebook_page_info()
     
     if page_info.get("connected"):
-        st.success(f"🟢 **เชื่อมต่อเพจ Facebook สำเร็จ!** | ชื่อเพจ: **{page_info.get('name', 'ห้องเรียนอารมณ์ดี')}** (ID: {page_info.get('id')})")
+        st.success(f"🟢 **เชื่อมต่อเพจ Facebook สำเร็จ!** | ชื่อเพจ: **{page_info.get('name', 'ห้องเรียนอารมณ์ดี')}** (ID: `{page_info.get('id')}`) | สถานะ API: **LIVE**")
     else:
         st.warning(f"⚠️ **สถานะการเชื่อมต่อ API:** {page_info.get('reason', 'โปรดตรวจสอบ Token ใน .env หรือ Secrets')}")
 
@@ -80,8 +80,6 @@ def render_fb_page_status_module():
             source = "📚 สื่อการสอน TPT" if p["source_type"] == "tpt_worksheet" else "🎬🛒 Shopee Reels"
             status_label = "🚀 โพสต์แล้ว" if p["status"] == "posted" else ("✅ อนุมัติแล้ว" if p["status"] == "approved" else "⏳ รอกรอง")
             
-            fb_link = f"https://facebook.com/{p['fb_post_id']}" if p.get('fb_post_id') else "ยังไม่ได้โพสต์"
-            
             posts_data.append({
                 "ID": f"#{p['id']}",
                 "หัวข้อคอนเทนต์": p["title"],
@@ -94,7 +92,7 @@ def render_fb_page_status_module():
         df_posts = pd.DataFrame(posts_data)
         st.dataframe(df_posts, use_container_width=True)
     else:
-        st.info("ยังไม่มีประวัติการโพสต์ ลองสร้างคอนเทนต์ในโมดูล 1 หรือ 2 แล้วกด Approve ในโมดูล 3 ได้เลยครับ!")
+        st.info("ยังไม่มีประวัติการโพสต์ในระบบ (ค่าเริ่มต้น 0 รายการ) คุณครูสามารถเริ่มสร้างคอนเทนต์ในโมดูล 1 หรือ 2 แล้วกด Approve ในโมดูล 3 ได้เลยครับ!")
 
     st.divider()
 

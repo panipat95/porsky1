@@ -54,22 +54,33 @@ def init_db():
     );
     """)
 
-    # 4. ตารางคิวโพสต์ Facebook Page (สำหรับ CEO ครูปอ ตรวจสอบและ Approve)
+    # 4. ตารางคิวโพสต์ Facebook Page
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS fb_posts_queue (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        source_type TEXT NOT NULL, -- 'tpt_worksheet' หรือ 'shopee_affiliate'
+        source_type TEXT NOT NULL,
         source_id INTEGER,
         title TEXT NOT NULL,
         content_formatted TEXT NOT NULL,
         media_url TEXT,
-        status TEXT DEFAULT 'pending_approval', -- 'pending_approval', 'approved', 'posted', 'rejected'
+        status TEXT DEFAULT 'pending_approval',
         scheduled_at DATETIME,
         fb_post_id TEXT,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     );
     """)
     
+    conn.commit()
+    conn.close()
+
+def reset_db_to_zero():
+    """ล้างข้อมูลทั้งหมดให้เป็น 0"""
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM students;")
+    cursor.execute("DELETE FROM worksheets;")
+    cursor.execute("DELETE FROM affiliate_products;")
+    cursor.execute("DELETE FROM fb_posts_queue;")
     conn.commit()
     conn.close()
 
